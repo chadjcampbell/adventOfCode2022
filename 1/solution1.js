@@ -13,11 +13,38 @@ function readTextFile1(file) {
 }
 
 readTextFile1("./data1.txt");
-console.log(data);
 
 let splitData = data.split("\n");
+let total = 0;
+let chunkTotal = 0;
+let elf = 1;
+let biggest = 0;
+let allChunkTotals = [];
 for (let i = 0; i < splitData.length; i++) {
   let line = splitData[i];
-  console.log(line);
-  //TODO
+  if (line == "") {
+    chunkTotal = total;
+    if (chunkTotal > biggest) {
+      biggest = chunkTotal;
+    }
+    elf++;
+    total = 0;
+    allChunkTotals.push(chunkTotal);
+  } else {
+    let int = parseInt(line);
+    total += int;
+  }
 }
+
+let sorted = allChunkTotals.sort((a, b) => b - a);
+
+let topThreeTotal = 0;
+for (let i = 0; i < 3; i++) {
+  topThreeTotal += sorted[i];
+}
+
+console.log(biggest);
+console.log(sorted);
+console.log(topThreeTotal);
+
+//TODO 205,590 is the current top 3, thats wrong! too low?
