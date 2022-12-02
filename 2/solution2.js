@@ -14,10 +14,9 @@ function readTextFile1(file) {
 
 readTextFile1("./data2.txt");
 
-let splitData = data.split("\n");
+const splitData = data.split("\n");
 let totalPoints = 0;
-let abc = [0, 1, 2];
-let xyzPoints = { X: 1, Y: 2, Z: 3 };
+const xyzPoints = { X: 1, Y: 2, Z: 3 };
 
 function roundPts(opponent, player) {
   if (opponent === "A") {
@@ -43,4 +42,34 @@ for (let i = 0; i < splitData.length; i++) {
   totalPoints += roundPts(opponent, player);
 }
 
+//part1
 console.log(totalPoints);
+
+function roundPts2(opponent, player) {
+  if (opponent === "A") {
+    if (player === "X") return 3;
+    if (player === "Y") return 1;
+    if (player === "Z") return 2;
+  }
+  if (opponent === "B") {
+    if (player === "X") return 1;
+    if (player === "Y") return 2;
+    if (player === "Z") return 3;
+  }
+  if (opponent === "C") {
+    if (player === "X") return 2;
+    if (player === "Y") return 3;
+    if (player === "Z") return 1;
+  }
+}
+
+let totalPoints2 = 0;
+const winLossPoints = { X: 0, Y: 3, Z: 6 };
+for (let i = 0; i < splitData.length; i++) {
+  let [opponent, player] = splitData[i].split(" ");
+  totalPoints2 += winLossPoints[`${player}`];
+  totalPoints2 += roundPts2(opponent, player);
+}
+
+//part2
+console.log(totalPoints2);
