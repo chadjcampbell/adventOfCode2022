@@ -17,7 +17,6 @@ readTextFile1("./data1.txt");
 let splitData = data.split("\n");
 let total = 0;
 let chunkTotal = 0;
-let elf = 1;
 let biggest = 0;
 let allChunkTotals = [];
 for (let i = 0; i < splitData.length; i++) {
@@ -27,7 +26,6 @@ for (let i = 0; i < splitData.length; i++) {
     if (chunkTotal > biggest) {
       biggest = chunkTotal;
     }
-    elf++;
     total = 0;
     allChunkTotals.push(chunkTotal);
   } else {
@@ -43,8 +41,8 @@ for (let i = 0; i < 3; i++) {
   topThreeTotal += sorted[i];
 }
 
+//part 1 answer
 console.log(biggest);
-console.log(sorted);
-console.log(topThreeTotal);
 
-//TODO 205,590 is the current top 3, thats wrong! too low?
+//part 2 answer
+console.log(topThreeTotal);
