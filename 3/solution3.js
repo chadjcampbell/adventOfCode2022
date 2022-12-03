@@ -21,6 +21,19 @@ function findItem(arr) {
   return Array.from(new Set([...letter]))[0];
 }
 
+function findLikeItems(arr1, arr2, arr3) {
+  const splitFirst = arr1.split("");
+  const splitSecond = arr2.split("");
+  const splitThird = arr3.split("");
+  const commonFirstTwo = Array.from(
+    new Set(splitFirst.filter((letter) => splitSecond.includes(letter)))
+  );
+  const commonAllThree = commonFirstTwo.filter((letter) =>
+    splitThird.includes(letter)
+  );
+  return Array.from(new Set([...commonAllThree]))[0];
+}
+
 readTextFile1("./data3.txt");
 
 const splitData = data.split("\n");
@@ -37,4 +50,20 @@ for (let i = 0; i < splitData.length; i++) {
   totalPoints += points;
 }
 
+//part1
 console.log(totalPoints);
+
+let points2 = 0;
+let totalPoints2 = 0;
+for (let i = 0; i < splitData.length; i += 3) {
+  let letter = findLikeItems(splitData[i], splitData[i + 1], splitData[i + 2]);
+  if (letter == letter.toUpperCase()) {
+    points2 = letter.charCodeAt(0) - 38;
+  } else {
+    points2 = letter.charCodeAt(0) - 96;
+  }
+  totalPoints2 += points2;
+}
+
+//part2
+console.log(totalPoints2);
