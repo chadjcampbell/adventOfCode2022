@@ -46,3 +46,25 @@ for (let i = 0; i < splitData.length; i++) {
 
 //part1
 console.log(counter);
+
+let counter2 = 0;
+let max;
+let min;
+for (let i = 0; i < splitData.length; i++) {
+  const [arr1, arr2] = makeArrays(splitData[i]);
+
+  if (parseInt(arr1[0]) >= parseInt(arr2[0])) {
+    max = parseInt(arr1[0]);
+  } else {
+    max = parseInt(arr2[0]);
+  }
+  if (parseInt(arr1[1]) <= parseInt(arr2[1])) {
+    min = parseInt(arr1[1]);
+  } else {
+    min = parseInt(arr2[1]);
+  }
+  if (max <= min) counter2++;
+}
+
+//part2
+console.log(counter2);
