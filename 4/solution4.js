@@ -16,4 +16,33 @@ readTextFile1("./data4.txt");
 
 const splitData = data.split("\n");
 
-for (let i = 0; i < splitData.length; i++) {}
+function makeArrays(string) {
+  const commaSplit = string.split(",");
+  const fullArray = commaSplit.map((string) => {
+    return string.split("-");
+  });
+  return fullArray;
+}
+
+let counter = 0;
+for (let i = 0; i < splitData.length; i++) {
+  const [arr1, arr2] = makeArrays(splitData[i]);
+
+  if (
+    parseInt(arr1[0]) <= parseInt(arr2[0]) &&
+    parseInt(arr1[1]) >= parseInt(arr2[1])
+  ) {
+    counter++;
+    continue;
+  }
+  if (
+    parseInt(arr1[0]) >= parseInt(arr2[0]) &&
+    parseInt(arr1[1]) <= parseInt(arr2[1])
+  ) {
+    counter++;
+    continue;
+  }
+}
+
+//part1
+console.log(counter);
