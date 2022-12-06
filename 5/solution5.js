@@ -33,6 +33,7 @@ function getInstructions(string) {
   return [array[1], array[3], array[5]];
 }
 
+/*
 for (let i = 0; i < splitData.length; i++) {
   let [howMany, startStack, endStack] = getInstructions(splitData[i]);
   howMany = parseInt(howMany);
@@ -43,7 +44,26 @@ for (let i = 0; i < splitData.length; i++) {
     stacks[`${endStack}`].push(movingCrate);
   }
 }
+*/
 
+//part1, uncomment first for loop for this part since it mutates data
+/*
+for (const crate in stacks) {
+  console.log(`${stacks[crate].pop()}`);
+}
+*/
+
+for (let i = 0; i < splitData.length; i++) {
+  let [howMany, startStack, endStack] = getInstructions(splitData[i]);
+  howMany = parseInt(howMany);
+  startStack = parseInt(startStack);
+  endStack = parseInt(endStack);
+
+  let movingCrates = stacks[`${startStack}`].splice(-howMany);
+  stacks[`${endStack}`] = stacks[`${endStack}`].concat(movingCrates);
+}
+
+//part2
 for (const crate in stacks) {
   console.log(`${stacks[crate].pop()}`);
 }
