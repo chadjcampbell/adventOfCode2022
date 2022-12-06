@@ -28,3 +28,16 @@ for (let i = 3; i < splitData.length; i++) {
     break;
   }
 }
+
+//part2
+for (let i = 3; i < splitData.length; i++) {
+  let temp = [];
+  for (let j = 0; j < 14; j++) {
+    temp.push(splitData[i + j]);
+  }
+  let noDups = Array.from(new Set([...temp]));
+  if (temp.length === noDups.length) {
+    console.log(i + 14);
+    break;
+  }
+}
