@@ -14,6 +14,17 @@ function readTextFile1(file) {
 
 readTextFile1("./data6.txt");
 
-const splitData = data.split("\n");
+const splitData = data.split("");
 
-for (let i = 0; i < splitData.length; i++) {}
+//part1
+for (let i = 3; i < splitData.length; i++) {
+  let temp = [];
+  for (let j = 0; j < 4; j++) {
+    temp.push(splitData[i + j]);
+  }
+  let noDups = Array.from(new Set([...temp]));
+  if (temp.length === noDups.length) {
+    console.log(i + 4);
+    break;
+  }
+}
