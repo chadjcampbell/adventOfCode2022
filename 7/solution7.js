@@ -1,8 +1,10 @@
 class Directory {
-  constructor(name, parent = null, children = []) {
+  constructor(name, parent = null, children = [], files = [], size = 0) {
     this.name = name;
     this.parent = parent;
     this.children = children;
+    this.files = files;
+    this.size = size;
   }
 }
 
@@ -32,28 +34,48 @@ readTextFile1("./data7.txt");
 
 const splitData = data.split("\n");
 
-let currentDir = new Directory(root);
+const rootDir = new Directory("root");
+
+let currentDir = rootDir;
+let dirArray = [rootDir];
 
 function changeDirectory(dir) {
-  if (dir === '/') {
-    currentDir = 
+  if (dir === "..") {
+    currentDir = currentDir.parent;
+  } else {
+    currentDir = currentDir.children.find((singleDir) => singleDir.name == dir);
   }
 }
 
-for (let i = 0; i < splitData.length; i++) {
+for (let i = 1; i < splitData.length; i++) {
+  console.log(currentDir);
+  console.log(i);
   let currentInstruction = splitData[i].split(" ");
+  console.log(currentInstruction);
   if (currentInstruction[0] === "$") {
     if (currentInstruction[1] === "cd") {
       changeDirectory(currentInstruction[2]);
+      continue;
     }
     if (currentInstruction[1] === "ls") {
       continue;
     }
   }
-  if (typeof parseInt(currentInstruction[0]) === "number") {
-    new File(currentInstruction[1], parseInt(currentInstruction[0]), currentDir)
+  if (!isNaN(currentInstruction[0])) {
+    let newFile = new File(
+      currentInstruction[1],
+      parseInt(currentInstruction[0]),
+      currentDir
+    );
+    currentDir.files.push(newFile);
+    currentDir.size += newFile.size;
+    //while (currentDir.parent !== null) {};
   }
   if (currentInstruction[0] === "dir") {
-    new Directory(currentInstruction[1], currentDir)
+    let newDir = new Directory(currentInstruction[1], currentDir);
+    currentDir.children.push(newDir);
+    continue;
   }
 }
+
+console.log(rootDir);
