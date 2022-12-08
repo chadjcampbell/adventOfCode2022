@@ -37,7 +37,6 @@ const splitData = data.split("\n");
 const rootDir = new Directory("root");
 
 let currentDir = rootDir;
-let dirArray = [rootDir];
 
 function changeDirectory(dir) {
   if (dir === "..") {
