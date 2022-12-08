@@ -47,11 +47,17 @@ function changeDirectory(dir) {
   }
 }
 
+function addFileSize(dir, file) {
+  if (dir.parent == null) {
+    dir.size += file.size;
+    return;
+  }
+  dir.size += file.size;
+  addFileSize(dir.parent, file);
+}
+
 for (let i = 1; i < splitData.length; i++) {
-  console.log(currentDir);
-  console.log(i);
   let currentInstruction = splitData[i].split(" ");
-  console.log(currentInstruction);
   if (currentInstruction[0] === "$") {
     if (currentInstruction[1] === "cd") {
       changeDirectory(currentInstruction[2]);
@@ -68,8 +74,7 @@ for (let i = 1; i < splitData.length; i++) {
       currentDir
     );
     currentDir.files.push(newFile);
-    currentDir.size += newFile.size;
-    //while (currentDir.parent !== null) {};
+    addFileSize(currentDir, newFile);
   }
   if (currentInstruction[0] === "dir") {
     let newDir = new Directory(currentInstruction[1], currentDir);
@@ -78,4 +83,20 @@ for (let i = 1; i < splitData.length; i++) {
   }
 }
 
+let total = 0;
+
+function getTotal(dir) {
+  if (dir.size <= 100000) {
+    total += dir.size;
+  }
+  if (dir.children === []) return;
+  dir.children.forEach((child) => {
+    getTotal(child);
+  });
+}
+
+getTotal(rootDir);
+
+//part1
+console.log(total);
 console.log(rootDir);
