@@ -100,3 +100,7 @@ getTotal(rootDir);
 //part1
 console.log(total);
 console.log(rootDir);
+
+const amountNeeded = (70000000 - rootDir.size - 30000000) * -1;
+
+console.log(amountNeeded);
