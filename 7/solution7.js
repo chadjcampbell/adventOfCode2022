@@ -99,8 +99,26 @@ getTotal(rootDir);
 
 //part1
 console.log(total);
-console.log(rootDir);
 
 const amountNeeded = (70000000 - rootDir.size - 30000000) * -1;
 
 console.log(amountNeeded);
+
+let eligableDirs = [];
+
+function findEligableDirs(dir) {
+  if (dir.size >= amountNeeded) {
+    eligableDirs.push(dir);
+  }
+  if (dir.children === []) return;
+  dir.children.forEach((child) => {
+    findEligableDirs(child);
+  });
+}
+
+findEligableDirs(rootDir);
+
+eligableDirs.sort((a, b) => (a.size > b.size ? 1 : -1));
+
+//part2
+console.log(eligableDirs[0].size);
