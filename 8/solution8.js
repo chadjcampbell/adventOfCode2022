@@ -21,13 +21,11 @@ class TreeNode {
   }
 }
 
-const splitData = data.split("\r\n");
+const splitData = data.split("\n");
 let grid = splitData.map((line) => {
   let nodes = line.split("");
   return nodes.map((node) => {
-    if (!node.isNaN) {
-      return new TreeNode(parseInt(node));
-    }
+    return new TreeNode(parseInt(node));
   });
 });
 
@@ -42,13 +40,13 @@ for (let i = 0; i < grid.length; i++) {
         break;
       }
     }
-    for (let x = j + 1; x < 100 - j; x++) {
+    for (let x = j + 1; x < 99; x++) {
       if (grid[i][x].height >= node.height) {
         blocked++;
         break;
       }
     }
-    for (let x = i + 1; x < 100 - i; x++) {
+    for (let x = i + 1; x < 99; x++) {
       if (grid[x][j].height >= node.height) {
         blocked++;
         break;
@@ -76,6 +74,5 @@ grid.forEach((line) => {
   });
 });
 
+//part1
 console.log(visibleTreeCount);
-//9407 too high
-//7803 too high
