@@ -22,7 +22,7 @@ class TreeNode {
   }
 }
 
-const splitData = data.split("\n");
+const splitData = data.split("\r\n");
 let grid = splitData.map((line) => {
   let nodes = line.split("");
   return nodes.map((node) => {
@@ -35,7 +35,7 @@ for (let i = 0; i < grid.length; i++) {
   const line = grid[i];
   for (let j = 0; j < line.length; j++) {
     const node = grid[i][j];
-    for (let x = 0; x < i; x++) {
+    for (let x = i - 1; x >= 0; x--) {
       if (grid[x][j].height >= node.height) {
         blocked++;
         break;
@@ -53,7 +53,7 @@ for (let i = 0; i < grid.length; i++) {
         break;
       }
     }
-    for (let x = 0; x < j; x++) {
+    for (let x = j - 1; x >= 0; x--) {
       if (grid[i][x].height >= node.height) {
         blocked++;
         break;
