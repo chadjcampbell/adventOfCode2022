@@ -39,40 +39,48 @@ function makeGrid(arr) {
   return grid;
 }
 
-function pullTail(direction, arr, arr2) {
+function pullTail(direction, arr, arr2, x) {
   switch (direction) {
     case "U":
       if (arr[1] !== arr2[1]) {
-        arr2 = [arr[0] + 1, arr[1]];
+        snake[x] = [arr[0] + 1, arr[1]];
         break;
       }
-      arr2[0] -= 1;
+      snake[x][0] -= 1;
       break;
     case "R":
       if (arr[0] !== arr2[0]) {
-        arr2 = [arr[0], arr[1] - 1];
+        snake[x] = [arr[0], arr[1] - 1];
         break;
       }
-      arr2[1] += 1;
+      snake[x][1] += 1;
       break;
     case "D":
       if (arr[1] !== arr2[1]) {
-        arr2 = [arr[0] - 1, arr[1]];
+        snake[x] = [arr[0] - 1, arr[1]];
         break;
       }
-      arr2[0] += 1;
+      snake[x][0] += 1;
       break;
     case "L":
       if (arr[0] !== arr2[0]) {
-        arr2 = [arr[0], arr[1] + 1];
+        snake[x] = [arr[0], arr[1] + 1];
         break;
       }
-      arr2[1] -= 1;
+      snake[x][1] -= 1;
       break;
   }
 }
 
 let snake = [
+  [0, 0],
+  [0, 0],
+  [0, 0],
+  [0, 0],
+  [0, 0],
+  [0, 0],
+  [0, 0],
+  [0, 0],
   [0, 0],
   [0, 0],
 ];
@@ -97,10 +105,9 @@ for (let i = 0; i < instructions.length; i++) {
         break;
     }
     for (let x = 0; x < snake.length - 1; x++) {
-      console.log(snake[x]);
-      console.log(snake[x + 1]);
+      let index = x + 1;
       if (checkTail(snake[x], snake[x + 1])) {
-        pullTail(direction, snake[x], snake[x + 1]);
+        pullTail(direction, snake[x], snake[x + 1], index);
       }
     }
     if (
