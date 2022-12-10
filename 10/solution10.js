@@ -12,7 +12,7 @@ function readTextFile1(file) {
   rawFile.send(null);
 }
 
-readTextFile1("./example.txt");
+readTextFile1("./data10.txt");
 
 const splitData = data.split("\n");
 
@@ -20,25 +20,32 @@ const instructions = splitData.map((line) => {
   return line.split(" ");
 });
 
-function updateX() {}
+function updateX() {
+  if (cycle === 20) {
+    signalStrength += cycle * X;
+  } else if ((cycle - 20) % 40 === 0) {
+    signalStrength += cycle * X;
+  }
+}
 
 let cycle = 0;
 let X = 1;
 let signalStrength = 0;
 for (let i = 0; i < instructions.length; i++) {
-  cycle++;
   let action = instructions[i][0];
   let value = parseInt(instructions[i][1]);
-  if (cycle === 20) {
-    signalStrength += cycle * X;
-  }
-  if (cycle % 40) {
-    signalStrength += cycle * X;
+  if (action === "noop") {
+    cycle++;
+    updateX();
   }
   if (action === "addx") {
     cycle++;
+    updateX();
+    cycle++;
+    updateX();
     X += value;
   }
-  console.log(cycle, X);
 }
+
+//part1
 console.log(signalStrength);
