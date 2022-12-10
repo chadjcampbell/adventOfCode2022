@@ -52,26 +52,39 @@ function part1() {
 //part1
 part1();
 
-function checkLine() {
-  cycle++;
-  line.push("#");
-  if (cycle % 40 === 0) {
-    console.log(line);
-    line = [];
+//part2
+
+function part2() {
+  function checkLine() {
+    sprite = [X - 1, X, X + 1];
+    if (sprite.includes(cycle)) {
+      line.push("#");
+    } else {
+      line.push(" ");
+    }
+    cycle++;
+    if (cycle % 40 === 0) {
+      console.log(line);
+      line = [];
+      X += 40;
+    }
+  }
+  let cycle = 0;
+  let X = 1;
+  let sprite = [];
+  let line = [];
+  for (let i = 0; i < instructions.length; i++) {
+    let action = instructions[i][0];
+    let value = parseInt(instructions[i][1]);
+    if (action === "noop") {
+      checkLine();
+    }
+    if (action === "addx") {
+      checkLine();
+      checkLine();
+      X += value;
+    }
   }
 }
-let cycle = 0;
-let X = 1;
-let line = [];
-for (let i = 0; i < instructions.length; i++) {
-  let action = instructions[i][0];
-  let value = parseInt(instructions[i][1]);
-  if (action === "noop") {
-    checkLine();
-  }
-  if (action === "addx") {
-    checkLine();
-    checkLine();
-    X += value;
-  }
-}
+
+part2();
