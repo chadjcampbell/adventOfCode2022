@@ -12,7 +12,7 @@ function readTextFile1(file) {
   rawFile.send(null);
 }
 
-readTextFile1("./data9.txt");
+readTextFile1("./example.txt");
 
 const splitData = data.split("\n");
 
@@ -21,6 +21,7 @@ const instructions = splitData.map((line) => {
 });
 
 function checkTail(arr, arr2) {
+  console.log(...snake);
   let grid = makeGrid(arr);
   if (grid.some((a) => arr2.every((v, i) => v === a[i]))) {
     return false;
@@ -123,4 +124,4 @@ for (let i = 0; i < instructions.length; i++) {
   }
 }
 
-console.log(tailVisitedCoords.length);
+console.log(tailVisitedCoords);
