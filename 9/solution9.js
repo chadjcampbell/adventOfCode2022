@@ -103,6 +103,7 @@ for (let i = 0; i < instructions.length; i++) {
     }
     if (checkTail()) pullTail(direction);
   }
+  console.log(currentTailCoords);
 }
 
 console.log(tailVisitedCoords.length);
