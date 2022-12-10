@@ -51,3 +51,27 @@ function part1() {
 
 //part1
 part1();
+
+function checkLine() {
+  cycle++;
+  line.push("#");
+  if (cycle % 40 === 0) {
+    console.log(line);
+    line = [];
+  }
+}
+let cycle = 0;
+let X = 1;
+let line = [];
+for (let i = 0; i < instructions.length; i++) {
+  let action = instructions[i][0];
+  let value = parseInt(instructions[i][1]);
+  if (action === "noop") {
+    checkLine();
+  }
+  if (action === "addx") {
+    checkLine();
+    checkLine();
+    X += value;
+  }
+}
