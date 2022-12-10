@@ -12,7 +12,7 @@ function readTextFile1(file) {
   rawFile.send(null);
 }
 
-readTextFile1("./example.txt");
+readTextFile1("./data9.txt");
 
 const splitData = data.split("\n");
 
@@ -21,7 +21,6 @@ const instructions = splitData.map((line) => {
 });
 
 function checkTail(arr, arr2) {
-  console.log(...snake);
   let grid = makeGrid(arr);
   if (grid.some((a) => arr2.every((v, i) => v === a[i]))) {
     return false;
@@ -40,37 +39,26 @@ function makeGrid(arr) {
   return grid;
 }
 
-function pullTail(direction, arr, arr2, x) {
-  switch (direction) {
-    case "U":
-      if (arr[1] !== arr2[1]) {
-        snake[x] = [arr[0] + 1, arr[1]];
-        break;
-      }
-      snake[x][0] -= 1;
-      break;
-    case "R":
-      if (arr[0] !== arr2[0]) {
-        snake[x] = [arr[0], arr[1] - 1];
-        break;
-      }
-      snake[x][1] += 1;
-      break;
-    case "D":
-      if (arr[1] !== arr2[1]) {
-        snake[x] = [arr[0] - 1, arr[1]];
-        break;
-      }
-      snake[x][0] += 1;
-      break;
-    case "L":
-      if (arr[0] !== arr2[0]) {
-        snake[x] = [arr[0], arr[1] + 1];
-        break;
-      }
-      snake[x][1] -= 1;
-      break;
+function pullTail(x) {
+  let [tailX, tailY] = snake[x];
+  let [headX, headY] = snake[x - 1];
+
+  let diffX = Math.abs(headX - tailX);
+  let diffY = Math.abs(headY - tailY);
+
+  if (diffX < 2 && diffY < 2) {
+    return;
   }
+  if (diffX > 1 && !diffY) {
+    tailX += headX - tailX > 0 ? 1 : -1;
+  } else if (diffY > 1 && !diffX) {
+    tailY += headY - tailY > 0 ? 1 : -1;
+  } else {
+    tailX += headX - tailX > 0 ? 1 : -1;
+    tailY += headY - tailY > 0 ? 1 : -1;
+  }
+
+  snake[x] = [tailX, tailY];
 }
 
 let snake = [
@@ -108,7 +96,7 @@ for (let i = 0; i < instructions.length; i++) {
     for (let x = 0; x < snake.length - 1; x++) {
       let index = x + 1;
       if (checkTail(snake[x], snake[x + 1])) {
-        pullTail(direction, snake[x], snake[x + 1], index);
+        pullTail(index);
       }
     }
     if (
@@ -124,4 +112,5 @@ for (let i = 0; i < instructions.length; i++) {
   }
 }
 
-console.log(tailVisitedCoords);
+//part2
+console.log(tailVisitedCoords.length);
