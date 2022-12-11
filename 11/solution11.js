@@ -17,7 +17,6 @@ let monkeyList = [
       } else {
         send(item, "Monkey 6");
       }
-      this.items.shift();
     },
   },
   {
@@ -33,7 +32,6 @@ let monkeyList = [
       } else {
         send(item, "Monkey 3");
       }
-      this.items.shift();
     },
   },
   {
@@ -49,7 +47,6 @@ let monkeyList = [
       } else {
         send(item, "Monkey 5");
       }
-      this.items.shift();
     },
   },
   {
@@ -63,9 +60,8 @@ let monkeyList = [
       if (item % 3 == 0) {
         send(item, "Monkey 7");
       } else {
-        send(item, "Monkey 5");
+        send(item, "Monkey 2");
       }
-      this.items.shift();
     },
   },
   {
@@ -81,7 +77,6 @@ let monkeyList = [
       } else {
         send(item, "Monkey 1");
       }
-      this.items.shift();
     },
   },
   {
@@ -97,7 +92,6 @@ let monkeyList = [
       } else {
         send(item, "Monkey 0");
       }
-      this.items.shift();
     },
   },
   {
@@ -113,7 +107,6 @@ let monkeyList = [
       } else {
         send(item, "Monkey 2");
       }
-      this.items.shift();
     },
   },
   {
@@ -129,20 +122,21 @@ let monkeyList = [
       } else {
         send(item, "Monkey 5");
       }
-      this.items.shift();
     },
   },
 ];
 
-console.log(monkeyList);
+console.log(...monkeyList);
 
-for (let i = 0; i < 20; i++) {
-  monkeyList.forEach((monkey) => {
-    monkey.items.forEach((item) => {
-      monkey.operation(item);
-      monkey.test(item);
+for (let j = 0; j < 20; j++) {
+  for (let i = 0; i < monkeyList.length; i++) {
+    monkeyList[i].items.forEach((item) => {
+      let newItem = monkeyList[i].operation(item);
+      monkeyList[i].test(newItem);
+      monkeyList[i].inspected++;
+      monkeyList[i].items = [];
     });
-  });
+  }
 }
 
 console.log(monkeyList);
