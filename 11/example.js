@@ -9,7 +9,7 @@ let monkeyList = [
     items: [79, 98],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item * 19) / 3);
+      return Math.floor(item * 19);
     },
     test: function (item) {
       if (item % 23 == 0) {
@@ -24,7 +24,7 @@ let monkeyList = [
     items: [54, 65, 75, 74],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item + 6) / 3);
+      return Math.floor(item + 6);
     },
     test: function (item) {
       if (item % 19 == 0) {
@@ -39,7 +39,7 @@ let monkeyList = [
     items: [79, 60, 97],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item * item) / 3);
+      return Math.floor(item * item);
     },
     test: function (item) {
       if (item % 13 == 0) {
@@ -54,7 +54,7 @@ let monkeyList = [
     items: [74],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item + 3) / 3);
+      return Math.floor(item + 3);
     },
     test: function (item) {
       if (item % 17 == 0) {
@@ -68,7 +68,7 @@ let monkeyList = [
 
 console.log(...monkeyList);
 
-for (let j = 0; j < 20; j++) {
+for (let j = 0; j < 10000; j++) {
   for (let i = 0; i < monkeyList.length; i++) {
     monkeyList[i].items.forEach((item) => {
       let newItem = monkeyList[i].operation(item);
