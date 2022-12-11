@@ -9,7 +9,7 @@ let monkeyList = [
     items: [83, 62, 93],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item * 17) / 3);
+      return Math.floor(item * 17);
     },
     test: function (item) {
       if (item % 2 == 0) {
@@ -24,7 +24,7 @@ let monkeyList = [
     items: [90, 55],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item + 1) / 3);
+      return Math.floor(item + 1);
     },
     test: function (item) {
       if (item % 17 == 0) {
@@ -39,7 +39,7 @@ let monkeyList = [
     items: [91, 78, 80, 97, 79, 88],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item + 3) / 3);
+      return Math.floor(item + 3);
     },
     test: function (item) {
       if (item % 19 == 0) {
@@ -54,7 +54,7 @@ let monkeyList = [
     items: [64, 80, 83, 89, 59],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item + 5) / 3);
+      return Math.floor(item + 5);
     },
     test: function (item) {
       if (item % 3 == 0) {
@@ -69,7 +69,7 @@ let monkeyList = [
     items: [98, 92, 99, 51],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item * item) / 3);
+      return Math.floor(item * item);
     },
     test: function (item) {
       if (item % 5 == 0) {
@@ -84,7 +84,7 @@ let monkeyList = [
     items: [68, 57, 95, 85, 98, 75, 98, 75],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item + 2) / 3);
+      return Math.floor(item + 2);
     },
     test: function (item) {
       if (item % 13 == 0) {
@@ -99,7 +99,7 @@ let monkeyList = [
     items: [74],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item + 4) / 3);
+      return Math.floor(item + 4);
     },
     test: function (item) {
       if (item % 7 == 0) {
@@ -114,7 +114,7 @@ let monkeyList = [
     items: [68, 64, 60, 68, 87, 80, 82],
     inspected: 0,
     operation: function (item) {
-      return Math.floor((item * 19) / 3);
+      return Math.floor(item * 19);
     },
     test: function (item) {
       if (item % 11 == 0) {
@@ -128,11 +128,11 @@ let monkeyList = [
 
 console.log(...monkeyList);
 
-for (let j = 0; j < 20; j++) {
+for (let j = 0; j < 10000; j++) {
   for (let i = 0; i < monkeyList.length; i++) {
     monkeyList[i].items.forEach((item) => {
       let newItem = monkeyList[i].operation(item);
-      monkeyList[i].test(newItem);
+      monkeyList[i].test(newItem % 9699690);
       monkeyList[i].inspected++;
       monkeyList[i].items = [];
     });
@@ -140,3 +140,4 @@ for (let j = 0; j < 20; j++) {
 }
 
 console.log(monkeyList);
+//19346922160 too low

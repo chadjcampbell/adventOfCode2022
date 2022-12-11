@@ -72,7 +72,7 @@ for (let j = 0; j < 10000; j++) {
   for (let i = 0; i < monkeyList.length; i++) {
     monkeyList[i].items.forEach((item) => {
       let newItem = monkeyList[i].operation(item);
-      monkeyList[i].test(newItem);
+      monkeyList[i].test(newItem % 96577);
       monkeyList[i].inspected++;
       monkeyList[i].items = [];
     });
