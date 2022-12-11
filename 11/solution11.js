@@ -140,4 +140,3 @@ for (let j = 0; j < 10000; j++) {
 }
 
 console.log(monkeyList);
-//19346922160 too low
