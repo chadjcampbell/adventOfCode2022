@@ -86,7 +86,7 @@ function validMoves(cell) {
         if (
           thisMove.x == square.x &&
           thisMove.y == square.y &&
-          thisMove.z - cell.z <= 1
+          cell.z - thisMove.z <= 1
         ) {
           validMoves.push(thisMove);
         }
@@ -97,7 +97,7 @@ function validMoves(cell) {
 }
 
 function findStart() {
-  return gameBoard.find((cell) => cell.x == 20 && cell.y == 0);
+  return gameBoard.find((cell) => cell.x == 20 && cell.y == 55);
 }
 
 function findPath() {
@@ -105,7 +105,7 @@ function findPath() {
   queue.enqueue(findStart());
   while (!queue.isEmpty()) {
     let currentMove = queue.dequeue();
-    if (currentMove.x == 20 && currentMove.y == 55) {
+    if (currentMove.z == 1) {
       return `=> You made it in ${currentMove.dis} moves!`;
     }
     validMoves(currentMove).forEach((move) => {
