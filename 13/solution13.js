@@ -28,7 +28,9 @@ function inOrder(left, right) {
   }
   if (typeof left === "object" && typeof right === "object") {
     for (let i = 0; i < right.length + 1; i++) {
-      if (left[i] == right[i]) {
+      if (left[i] === right[i]) {
+        continue;
+      } else if (!left.length && !right.length) {
         continue;
       } else if (inOrder(left[i], right[i]) === true) {
         return true;
@@ -64,3 +66,4 @@ console.log(sumIndex);
 //5876 too high
 //5586 is wrong
 //console.log(inOrder([], []));
+//5548 is the right answer, figure it out!
