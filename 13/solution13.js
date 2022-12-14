@@ -60,9 +60,5 @@ for (let i = 0; i < splitData.length; i++) {
   index += 1;
 }
 
+//part1
 console.log(sumIndex);
-//7303 too high
-//6020 too high
-//5876 too high
-//5586 is wrong
-//5548 is the right answer, figure it out!
