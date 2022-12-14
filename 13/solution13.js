@@ -14,7 +14,7 @@ function readTextFile1(file) {
 
 readTextFile1("./data13.txt");
 
-const splitData = data.split("\r\n\r\n");
+const splitData = data.split("\n\n");
 
 let index = 1;
 let sumIndex = 0;
@@ -50,7 +50,7 @@ function inOrder(left, right) {
 }
 
 for (let i = 0; i < splitData.length; i++) {
-  const packet = splitData[i].split("\r\n");
+  const packet = splitData[i].split("\n");
   const leftPacket = JSON.parse(packet[0]);
   const rightPacket = JSON.parse(packet[1]);
   console.log(inOrder(leftPacket, rightPacket));
@@ -65,5 +65,4 @@ console.log(sumIndex);
 //6020 too high
 //5876 too high
 //5586 is wrong
-//console.log(inOrder([], []));
 //5548 is the right answer, figure it out!
