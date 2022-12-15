@@ -14,4 +14,15 @@ function readTextFile1(file) {
 
 readTextFile1("./example.txt");
 
-const splitData = data.split("\n");
+const splitData = data.split("\r\n");
+
+for (let i = 0; i < splitData.length; i++) {
+  let sXStart = splitData[i].indexOf("=");
+  let sXEnd = splitData[i].indexOf(",", sXStart + 1);
+  let sX = parseInt(splitData[i].slice(sXStart + 1, sXEnd));
+  let sYStart = splitData[i].indexOf("=", sXEnd + 1);
+  let sYEnd = splitData[i].indexOf(":", sYStart + 1);
+  let sY = parseInt(splitData[i].slice(sYStart + 1, sYEnd));
+
+  console.log(sX, sY);
+}
