@@ -74,21 +74,21 @@ for (let i = 0; i < splitData.length; i++) {
 }
 
 const findLowest = [...nodeList].sort((a, b) => b.y - a.y)[0].y;
-let floor = findLowest + 2;
+const floor = findLowest + 2;
 let sandTotal = 0;
 let clogged = false;
-
-function buildFloor() {
-  for (let i = -1500; i < 2500; i++) {
-    nodeList.push(new Node(i, floor));
-  }
-}
-
-buildFloor();
 
 function sandFall() {
   let Sand = new Node(500, 0, true);
   while (Sand.falling) {
+    if (
+      nodeList.find(
+        (node) => node.x == 500 && node.y == 0 && node.falling == false
+      )
+    ) {
+      clogged = true;
+      break;
+    }
     if (nodeList.find((node) => node.x == Sand.x && node.y == Sand.y + 1)) {
       if (
         !nodeList.find((node) => node.x == Sand.x - 1 && node.y == Sand.y + 1)
@@ -109,20 +109,18 @@ function sandFall() {
         break;
       }
     }
-    Sand.y++;
-    if (
-      nodeList.find(
-        (node) => node.x == 500 && node.y == 0 && node.falling == false
-      )
-    ) {
-      clogged = true;
+    if (Sand.y == floor - 1) {
+      Sand.falling = false;
+      nodeList.push(Sand);
+      sandTotal++;
       break;
     }
+    Sand.y++;
   }
 }
-/*
+
 while (!clogged) {
   sandFall();
 }
-*/
+
 console.log(sandTotal);
