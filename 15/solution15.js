@@ -12,7 +12,7 @@ function readTextFile1(file) {
   rawFile.send(null);
 }
 
-readTextFile1("./example.txt");
+readTextFile1("./data15.txt");
 
 const splitData = data.split("\r\n");
 
@@ -35,32 +35,42 @@ function extractCoords(string) {
 
 function diamond(number, x, y) {
   let n = number;
-  let string = "";
+  //let string = "";
   // Upside pyramid
   for (let i = 1; i <= n; i++) {
+    let newY = y - n + i;
     // printing spaces
-    for (let j = n; j > i; j--) {
-      string += " ";
-    }
+    //for (let j = n; j > i; j--) {
+    //string += "       ";
+    //}
     // printing star
-    for (let k = 0; k < i * 2 - 1; k++) {
-      string += "*";
+    if (newY == 2000000) {
+      for (let k = 0; k < i * 2 - 1; k++) {
+        let newX = x + k - i + 1;
+        yPostions.add(newX);
+        //string += `(${newX}, ${newY})`;
+      }
     }
-    string += "\n";
+    //string += "\n";
   }
   // downside pyramid
   for (let i = 1; i <= n - 1; i++) {
+    let newY = y + i;
     // printing spaces
-    for (let j = 0; j < i; j++) {
-      string += " ";
-    }
+    //for (let j = 0; j < i; j++) {
+    //string += "       ";
+    //}
     // printing star
-    for (let k = (n - i) * 2 - 1; k > 0; k--) {
-      string += "*";
+    if (newY == 2000000) {
+      for (let k = 2 * n - 2 * i - 1, l = 0; k > 0; k--, l++) {
+        let newX = x - n + l + i + 1;
+        yPostions.add(newX);
+        //string += `(${newX}, ${newY})`;
+      }
     }
-    string += "\n";
+    //string += "\n";
   }
-  console.log(string);
+  //console.log(string);
 }
 
 let yPostions = new Set();
@@ -70,5 +80,7 @@ for (let i = 0; i < splitData.length; i++) {
   const [sX, sY, bX, bY] = extractCoords(splitData[i]);
   const taxiCab = Math.abs(sX - bX) + Math.abs(sY - bY);
   diamond(taxiCab + 1, sX, sY);
-  console.log(taxiCab);
+  //console.log(taxiCab);
 }
+
+console.log(yPostions.size - 1);
